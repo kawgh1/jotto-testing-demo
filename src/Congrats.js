@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 // receive success state (true, false - whether word has been correctly guessed) as a prop
 
@@ -8,8 +9,8 @@ import React from "react";
  * @param {object} props - React props
  * @returns {JSX.Element} - Rendered component (or null if `successState` prop is false)
  */
-function Congrats({ successState }) {
-    if (successState) {
+const Congrats = (props) => {
+    if (props.successState) {
         return (
             <div data-test="component-congrats">
                 <span data-test="congrats-message">
@@ -20,6 +21,10 @@ function Congrats({ successState }) {
     } else {
         return <div data-test="component-congrats"></div>;
     }
-}
+};
+
+Congrats.propTypes = {
+    successState: PropTypes.bool.isRequired,
+};
 
 export default Congrats;

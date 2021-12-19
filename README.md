@@ -2,6 +2,11 @@
 
 ### Basic React App game where user guesses random 5 letter word supplied by a server - used to demonstrate TDD and Enzyme+Jest testing
 
+![jotto-mock-wireframe](https://raw.githubusercontent.com/kawgh1/jotto-testing-demo/7a7c412269cbb20437ea41e5f594f0c3b46d5614/jotto-app-wireframe-mock.png)
+
+Props used in Jotto App
+![jotto-props](https://raw.githubusercontent.com/kawgh1/jotto-testing-demo/7a7c412269cbb20437ea41e5f594f0c3b46d5614/jotto-props.png)
+
 ### Notes
 
 -   Jest in "Watch Mode" will only test files that have been updated since the last commit

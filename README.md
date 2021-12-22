@@ -62,6 +62,7 @@ Props used in Jotto App
 ## Tests
 
 -   ## Functional Tests
+
     -   Test user flow - testing what the app does, not how
     -   Independent of code implementation
         -   Can be used for Redux or Context
@@ -69,3 +70,16 @@ Props used in Jotto App
         -   `successState`
         -   `secretWord`
         -   `guessedWords`
+
+-   ## `.only`, `.skip` and `.todo`
+
+    -   Jest methods on `test` and `describe`
+    -   `.only`: only run test/describe **in this file** with `.only` specified
+    -   `.skip`: don't run any test/describe **in this file** with `.skip` specified
+        -   Good for isolating tests - such as when we have a particularly tricky code impl to test and we just want to isolate that one test until we get it passing
+        -   or skipping tests when we may not have that part of the code or app functionality ready to test yet _but we know the expected behavior to test for (and thus, can write tests to be skipped_)
+    -   `.todo` is for test to remind yourself to write later
+
+                describe('invalid word guessed', () => {
+                    test.todo('guessedWords table does not get another row');
+                });

@@ -179,3 +179,48 @@ Props used in Jotto App
 
         -   For project modules
             -   At the same level as the module
+                -   src
+                    -   App.js
+                    -   App.test.js
+                    -   **mocks**
+                        -   helpers.js
+                    -   helpers.js
+
+    -   ## Different Behavior for Node Modules
+
+        -   `__mocks__` file that provides mocks
+            -   mocking a node module (ex. 'react')
+                -   mocks automatically unless you explicitly unmock at the top of the test file
+            -   mocking a project module
+                -   will **not** mock unless you explicitly mock at the top of the test file
+
+    -   ## Mocking with Create-React-App
+
+        -   Issue with location of node modules
+            -   `__mocks__` folder needs to be at top level of `src`, not same level as `node_modules`
+            -   link to issue: https://github.com/facebook/create-react-app/issues/7539
+            -   Mocks reset automatically before each test
+                -   This is a problem if you've specified return value
+                    -   https://github.com/facebook/jest/issues/9131#issuecomment-668790615
+
+    -   ## Mocking useEffect Hook
+        -   React hook that runs function on component reload, every reload
+            -   or specify to re-run only when certain values change
+        -   "re-run when an empty array changes" = run only on mount
+            -   equivalent of `componentDidMount`
+            -   example - we wouldn't want to `secretWord` to change every time the player guessed a word! No one would play that game
+        -   use Enzyme `mount` not `shallow` for `useEffect`
+            -   `useEffect` not called on `shallow`
+            -   https://github.com/airbnb/enzyme/issues/2086
+        -   Mock module containing `getSecretWord`
+            -   set up global mock to avoid network calls in tests
+        -   Clear mock using `.clearMock()` after each test so we know that we dont have any side effects from any previous tests
+            -   mock tracks calls cumulatively until reset
+        -   `secretWord` should not update on App update
+            -   evil game - word changes every guess
+        -   Notes: we are not testing that React's useEffect hook works properly
+            -   That's React's job
+            -   We are testing that our code is using the hook properly
+        -   Will trigger update with Enzyme `setProps()`
+            -   `update()` doesnt trigger `useEffect()`
+            -   issue https://github.com/enzymejs/enzyme/issues/2254

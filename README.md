@@ -86,6 +86,8 @@ Props used in Jotto App
 
 -   ## Testing Axios calls
 
+    -   **npm install axios**
+
     -   `getSecretWord` in both Context and Redux Implementations
         -   Actual function slightly different
             -   In Redux we're adding that secret word to the global state
@@ -94,6 +96,8 @@ Props used in Jotto App
     -   Test code using `moxios` is the same for both
 
 -   ## `Moxios`
+
+    -   **npm install --save-dev moxios**
 
     -   Random word server is necessary for actual app, but we don't want to test the server when testing the app
     -   Using Moxios lets us test just the app and mock axios calls
@@ -123,3 +127,24 @@ Props used in Jotto App
                             response: secretWord
                         });
                     });
+
+-   ## Testing Asynchronous Functions
+    -   `getSecretWord` returns a promise from Axios
+    -   Put assertion in `.then()` callback after running `getSecretWord()`
+        -   Assertion will run after promise resolves
+    -   So Much Asynchronicity!
+        -   `moxios.wait()` is also asynchronous
+        -   More important than ever, when testing asychronous functions, to see our tests fail
+        -   **It is very easy to make a mistake such that a test completes before async resolves**
+            -   Leaving the impression that the test passed when really the async function never even resolved!
+            -   **Tests can and do pass even though assertions fail!**
+                -   If you're not careful, the test can exist before the promise resolves
+                -   Since the test function is a regular JS function, when it calls the async call, the test function may finish without error before the async call
+    -   **This is why it's important to see your async tests fail**
+        -   If you can see the test fail, you know the assertion is being run before the test function completes, and thus the async call is resolving
+        -   **Make sure to return your function call `getSecretWord()` in the test**
+            -   this way we know the test won't finish before async promise resolves
+        -   **Make sure to call assertion in the `.then()` callback from your function call**
+            -   Can also use async and await
+            -   won't run until `getSecretWord()` async promise resolves
+        -   **Make sure you can see the tests fail**

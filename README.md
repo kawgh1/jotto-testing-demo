@@ -58,3 +58,10 @@ Props used in Jotto App
         const propError = checkPropTypes(Congrats.propTypes, expectedProps, 'prop', Congrats.name);
         expect(propError).toBeUndefined();
         })
+
+## Tests
+
+-   ## Functional Tests
+    -   Test user flow - testing what the app does, not how
+    -   Independent of code implementation
+        -   Can be used for Redux or Context

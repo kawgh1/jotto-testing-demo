@@ -65,3 +65,7 @@ Props used in Jotto App
     -   Test user flow - testing what the app does, not how
     -   Independent of code implementation
         -   Can be used for Redux or Context
+    -   Initial state: props to send to components:
+        -   `successState`
+        -   `secretWord`
+        -   `guessedWords`

@@ -83,3 +83,43 @@ Props used in Jotto App
                 describe('invalid word guessed', () => {
                     test.todo('guessedWords table does not get another row');
                 });
+
+-   ## Testing Axios calls
+
+    -   `getSecretWord` in both Context and Redux Implementations
+        -   Actual function slightly different
+            -   In Redux we're adding that secret word to the global state
+            -   in Context we're setting the App level state
+        -   Both functions will call `axios`
+    -   Test code using `moxios` is the same for both
+
+-   ## `Moxios`
+
+    -   Random word server is necessary for actual app, but we don't want to test the server when testing the app
+    -   Using Moxios lets us test just the app and mock axios calls
+    -   How Moxios works
+
+        -   Test installs Moxios
+            -   Axios will now send requests to Moxios instead of HTTP
+            -   Test specifies Moxios response to return to Axios to return to our app
+
+    -   Moxios Syntax
+
+        -   Test calls `moxios.install()`
+            -   Sets moxios as the axios adapter
+            -   Routes axios calls to moxios instead of http
+        -   Can pass axios Instance to `moxios.install()`
+            -   Use your configured settings
+            -   If not instance, leave param blank for default settings
+        -   Call `moxios.wait()` during test
+
+            -   watches for axios calls
+            -   Sends response using the callback passed to `.wait()`
+
+                    moxios.wait(() => {
+                        const request = moxios.requests.mostRecent();
+                        request.respondWith({
+                            status: 200
+                            response: secretWord
+                        });
+                    });

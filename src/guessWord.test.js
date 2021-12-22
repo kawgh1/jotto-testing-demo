@@ -30,7 +30,7 @@ const setup = (state = {}) => {
     return wrapper;
 };
 
-describe("no words guessed", () => {
+describe.skip("no words guessed", () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
@@ -46,7 +46,7 @@ describe("no words guessed", () => {
     });
 });
 
-describe("some words guessed", () => {
+describe.skip("some words guessed", () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
@@ -62,7 +62,7 @@ describe("some words guessed", () => {
     });
 });
 
-describe("secret word was guessed", () => {
+describe.skip("secret word was guessed", () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({

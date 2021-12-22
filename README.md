@@ -224,3 +224,16 @@ Props used in Jotto App
         -   Will trigger update with Enzyme `setProps()`
             -   `update()` doesnt trigger `useEffect()`
             -   issue https://github.com/enzymejs/enzyme/issues/2254
+
+-   # Notes on Shared State (Redux vs. Context API)
+    -   Shared State is used for props needed by lots of components
+        -   Global settings (language, visual theme, user properties)
+        -   Deeply nested components that need access to certain props that their ancestors don't
+    -   Redux vs Context API
+        -   Simple apps: Context works great
+        -   Sophisticated apps: Redux has better tools
+            -   optimization for high frequency updates or state changes
+            -   rich ecosystem for developers
+                -   tools for debugging
+            -   middleware for automatic code upon any action
+                -   for example, logging events to analytics pipelines

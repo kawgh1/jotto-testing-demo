@@ -129,6 +129,7 @@ Props used in Jotto App
                     });
 
 -   ## Testing Asynchronous Functions
+
     -   `getSecretWord` returns a promise from Axios
     -   Put assertion in `.then()` callback after running `getSecretWord()`
         -   Assertion will run after promise resolves
@@ -148,3 +149,33 @@ Props used in Jotto App
             -   Can also use async and await
             -   won't run until `getSecretWord()` async promise resolves
         -   **Make sure you can see the tests fail**
+
+-   ## Mocking Modules in Jest
+
+    -   Before, we mocked pieces of or methods of modules individually: `React.useState()` by overriding the useState method
+    -   That was done test-file by test-file
+        -   reasonable: sometimes we wanted to mock, sometimes we didn't
+    -   We are going to want to mock the `getSecretWord` action everywhere
+        -   never want to go across the network except maybe for End-to-End testing
+    -   For this: mock the module **globally** so it will automatically be mocked for all of our files
+
+    -   ## Mock files for global mocks
+
+        -   Global mock file can be used by **any** test file
+        -   Located in folder with special name: `__mocks__`
+        -   Useful if you want to mock every time ( or almost every time)
+        -   Test files import from `__mocks__` code instead of actual module code
+
+    -   ## Location of `__mocks__` folder
+
+        -   For any node module
+
+            -   At same level as the `node_modules` folder
+                -   jotto-redux/
+                    -   **mocks**
+                        -   react.js
+                    -   node_modules
+                    -   src
+
+        -   For project modules
+            -   At the same level as the module

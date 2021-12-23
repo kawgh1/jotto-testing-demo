@@ -256,4 +256,14 @@ Props used in Jotto App
 
 -   If you're testing immutable types like an object or an array use expect(object).toStrictEqual() instead of toBe()
 -   If you're testing mutable types like a number or a String, toBe() will work fine
+
     -   Also `toStrictEqual()` is a **deep equal** so it will not only compare the top level properties of an object but also any values contained within
+
+-   ### `successReducer` Tests
+    -   Reducer is a function (previousState, action) => newState
+    -   Undefined state
+        -   return expected initial state (success = `false`)
+    -   Unknown action
+        -   return whatever state was passed in as an argument
+    -   `CORRECT_GUESS` action type
+        -   return `true`

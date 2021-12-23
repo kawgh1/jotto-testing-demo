@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { getSecretWord } from "./actions";
 import "./App.css";
 import Congrats from "./Congrats";
-import GuessedWords from "./GuessedWords";
+import GuessedWords from "./UserGuessedWords";
 import Input from "./Input";
 
 function App() {

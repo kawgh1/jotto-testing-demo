@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element} - Rendered component (or null if `successState` prop is false)
  */
 const Congrats = (props) => {
-    if (props.successState) {
+    if (props.success) {
         return (
             <div data-test="component-congrats" className="alert alert-success">
                 <span data-test="congrats-message">
@@ -24,7 +24,7 @@ const Congrats = (props) => {
 };
 
 Congrats.propTypes = {
-    successState: PropTypes.bool.isRequired,
+    success: PropTypes.bool.isRequired,
 };
 
 export default Congrats;

@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+// redux
+import { useSelector } from "react-redux";
 
-function Input({ successState, secretWord }) {
+function Input({ secretWord }) {
     // not destructuring so that the mock functions work in testing, weird thing
     const [currentGuess, setCurrentGuess] = React.useState("");
+    // redux
+    const success = useSelector((state) => state.success);
 
-    if (successState) {
+    if (success) {
         return <div data-test="component-input" />;
     }
     return (

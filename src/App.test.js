@@ -1,9 +1,12 @@
 import { mount } from "enzyme";
-import { findByTestAttr } from "../test/testUtils";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
 
 // import getSecretWord function to call in our mock
 import { getSecretWord as mockGetSecretWord } from "./actions";
+
+//redux
+import { Provider } from "react-redux";
 
 // explicitly activate global mock to make sure getSecretWord doesnt make a network call
 jest.mock("./actions");
@@ -15,7 +18,12 @@ jest.mock("./actions");
 const setup = () => {
     // have to use mount because useEffet does not work with 'shallow'
     // https://github.com/airbnb/enzyme/issues/2086
-    return mount(<App />);
+    const store = storeFactory();
+    return mount(
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
 };
 
 test("renders without error", () => {

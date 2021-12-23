@@ -260,6 +260,7 @@ Props used in Jotto App
     -   Also `toStrictEqual()` is a **deep equal** so it will not only compare the top level properties of an object but also any values contained within
 
 -   ### `successReducer` Tests
+
     -   Reducer is a function (previousState, action) => newState
     -   Undefined state
         -   return expected initial state (success = `false`)
@@ -267,3 +268,32 @@ Props used in Jotto App
         -   return whatever state was passed in as an argument
     -   `CORRECT_GUESS` action type
         -   return `true`
+
+-   ### Input Interactions with `success`
+
+    -   get `success` piece of state
+        -   whether or not to display input box and button
+        -   passed as a prop when creating Input component
+    -   Refactor Input component to receive `success` via `useSelector`
+    -   Also will need to call action creator when a word is guessed (_set_)
+
+        -   that will come in with Redux Thunk
+
+    -   #### `useSelector`
+
+        -   useSelector is a way to access state using a functional component
+            -   no need to use class-based components or `connect` to higher order component (HOC)
+        -   useSelector takes a function as an argument, transforms the state and then returns only the piece of state we need
+        -   For Input, we want the success piece of state
+            -   `state` => `state.success`
+
+    -   #### Testing with `useSelector`
+        -   Two choices for testing state accessed with `useSelector`:
+            -   wrap component in `Provider` and use `mount`
+                -   `mount(<Provider> <Input /> </Provider>)`
+                -   **Pros**: closer to actual code, cleaner, more readable
+                -   **Cons**: less isolated, slower if many children - `<Provider>` requires a store and a store requires a test store factory (see testUtils.js)
+            -   ## OR
+            -   mock `useSelector`
+                -   **Pros**: isolated, faster if many children
+                -   **Cons**: farther from actual code, need to duplicate selector function, can be messy, confusing leading to testing errors

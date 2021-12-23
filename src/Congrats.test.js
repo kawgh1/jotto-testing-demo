@@ -17,7 +17,7 @@ When using defaultProps in testing, its important to always be aware what they a
 and if they ever change - if they do change, you could be using bad props in your tests
 making them pointless or even bad if they pass when they should fail from using incorrect props
  */
-const defaultProps = { successState: false };
+const defaultProps = { success: false };
 
 // setup function run before each test
 /**
@@ -34,19 +34,19 @@ const setup = (props = {}) => {
 };
 
 test("renders without error", () => {
-    const wrapper = setup({ successState: false });
+    const wrapper = setup({ success: false });
     const component = findByTestAttr(wrapper, "component-congrats");
     expect(component.length).toBe(1);
 });
 
-test("renders no text when `successState` prop is false", () => {
-    const wrapper = setup({ successState: false });
+test("renders no text when `success` prop is false", () => {
+    const wrapper = setup({ success: false });
     const component = findByTestAttr(wrapper, "component-congrats");
     expect(component.text()).toBe("");
 });
 
-test("renders non-empty congrats message when `successState` prop is true", () => {
-    const wrapper = setup({ successState: true });
+test("renders non-empty congrats message when `success` prop is true", () => {
+    const wrapper = setup({ success: true });
     const component = findByTestAttr(wrapper, "congrats-message");
     expect(component.text().length).not.toBe(0);
 });
@@ -56,6 +56,6 @@ when incorrect PropTypes are used in a Component
 and we are testing, when this Congrats component 
 is given 'successSate: false', it does not throw a warning for bad Prop Types */
 test("does not throw warning with expected props", () => {
-    const expectedProps = { successState: false };
+    const expectedProps = { success: false };
     checkProps(Congrats, expectedProps);
 });

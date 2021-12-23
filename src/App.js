@@ -7,7 +7,7 @@ import Input from "./Input";
 
 function App() {
     // TODO: get props from shared state
-    const successState = false;
+    const success = false;
     const secretWord = "party";
     const guessedWords = [];
 
@@ -18,8 +18,8 @@ function App() {
     return (
         <div data-test="component-app" className="container">
             <h1>Jotto</h1>
-            <Congrats successState={successState} />
-            <Input successState={successState} secretWord={secretWord} />
+            <Congrats success={success} />
+            <Input success={success} secretWord={secretWord} />
             <GuessedWords guessedWords={guessedWords} />
         </div>
     );

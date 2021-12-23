@@ -1,8 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 
-import { checkProps, findByTestAttr } from "../test/testUtils";
+import { checkProps, findByTestAttr, storeFactory } from "../test/testUtils";
 import Input from "./Input";
+// redux
+import { Provider } from "react-redux";
 
 // mock entire module for destructuring useState on import //////
 // const mockSetCurrentGuess = jest.fn();
@@ -15,47 +17,50 @@ import Input from "./Input";
  * Setup function for app component
  * @returns {ShallowWrapper}
  */
-const setup = (successState = false, secretWord = "party") => {
-    return shallow(
-        <Input successState={successState} secretWord={secretWord} />
+const setup = (initialState = {}, secretWord = "party") => {
+    const store = storeFactory(initialState);
+    return mount(
+        <Provider store={store}>
+            <Input secretWord={secretWord} />
+        </Provider>
     );
 };
 
 describe("render", () => {
-    describe("successState is true", () => {
+    describe("success is true", () => {
         // let wrapper;
         // beforeEach(() => {
         //     wrapper = setup(true);
         // });
         test("Input renders without error", () => {
-            const wrapper = setup(true);
+            const wrapper = setup({ success: true });
             const inputComponent = findByTestAttr(wrapper, "component-input");
             expect(inputComponent.length).toBe(1);
         });
         test("Input box does not display once user guesses secret word", () => {
-            const wrapper = setup(true);
+            const wrapper = setup({ success: true });
             const inputBox = findByTestAttr(wrapper, "input-box");
             expect(inputBox.exists()).toBe(false);
         });
         test("Submit button does not display once user guesses secret word", () => {
-            const wrapper = setup(true);
+            const wrapper = setup({ success: true });
             const submitButton = findByTestAttr(wrapper, "submit-button");
             expect(submitButton.exists()).toBe(false);
         });
     });
     describe("successState is false", () => {
         test("Input renders without error", () => {
-            const wrapper = setup(false);
+            const wrapper = setup({ success: false });
             const inputComponent = findByTestAttr(wrapper, "component-input");
             expect(inputComponent.length).toBe(1);
         });
         test("Input box does display if user guesses incorrectly", () => {
-            const wrapper = setup(false);
+            const wrapper = setup({ success: false });
             const inputBox = findByTestAttr(wrapper, "input-box");
             expect(inputBox.exists()).toBe(true);
         });
         test("Submit button does display if user guesses incorrectly", () => {
-            const wrapper = setup(false);
+            const wrapper = setup({ success: false });
             const submitButton = findByTestAttr(wrapper, "submit-button");
             expect(submitButton.exists()).toBe(true);
         });
@@ -92,7 +97,7 @@ describe("state controlled input field", () => {
         // override useState method
         React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
 
-        const wrapper = setup();
+        const wrapper = setup({ success: false });
         const inputBox = findByTestAttr(wrapper, "input-box");
 
         // mock event

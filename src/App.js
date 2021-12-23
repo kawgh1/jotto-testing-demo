@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { getSecretWord } from "./actions";
 import "./App.css";
 import Congrats from "./Congrats";
-import GuessedWords from "./GuessedWords";
+import UserGuessedWords from "./UserGuessedWords";
 import Input from "./Input";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
             <h1>Jotto</h1>
             <Congrats successState={successState} />
             <Input successState={successState} secretWord={secretWord} />
-            <GuessedWords guessedWords={guessedWords} />
+            <UserGuessedWords guessedWords={guessedWords} />
         </div>
     );
 }

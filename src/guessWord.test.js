@@ -7,6 +7,9 @@ import { mount } from "enzyme";
 import App from "./App";
 import { findByTestAttr } from "../test/testUtils";
 
+// This file is testing the app as a whole and mocking the user guess a word action
+// notice we are mounting the app, not using shallow
+
 /**
  * Create wrapper with specified initial conditions,
  * then submit a guessed word of 'train'

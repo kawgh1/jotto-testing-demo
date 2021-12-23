@@ -1,5 +1,9 @@
 # Jotto
 
+-   ##### Different perspective before diving in
+    -   ##### Testing React: A convert’s journey from Enzyme to Testing Library
+        -   https://bonniedotdev.medium.com/testing-react-a-converts-journey-from-enzyme-to-testing-library-70f85eebb674
+
 ### Basic React App game where user guesses random 5 letter word supplied by a server - used to demonstrate TDD and Enzyme+Jest testing
 
 -   ### Branches
@@ -243,3 +247,7 @@ Props used in Jotto App
                 -   tools for debugging
             -   middleware for automatic code upon any action
                 -   for example, logging events to analytics pipelines
+
+# REDUX
+
+-   **npm install --save redux react-redux**

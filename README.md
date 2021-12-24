@@ -300,6 +300,7 @@ Props used in Jotto App
                 -   **Cons**: farther from actual code, need to duplicate selector function, can be messy, confusing leading to testing errors
 
     -   ### Redux Thunk
+
         -   **npm install redux-thunk**
         -   More flexibility for action creators
         -   Return function instead of an action
@@ -311,3 +312,27 @@ Props used in Jotto App
             -   If guessed word is correct, it will also dispatch `CORRECT_GUESS`
             -   Lets us access `success` piece of state
             -   For determining whether or not to dispatch `CORRECT_GUESS`
+
+    -   ### What can we do with `store`?
+
+        -   `store.dispatch()`
+            -   Takes an action creator
+        -   `store.getState()`
+            -   Return state object
+            -   Useful for assertions
+
+    -   ### Testing a Thunk
+
+        -   Create a store with initial state
+            -   Will contain `secretWord`
+        -   Dispatch action creator
+            -   `store.dispatch(guessWord())`
+        -   Check state
+            -   Use Jest's `.toEqual()` to test state object as a whole
+            -   Inside our test, we'll make an object of the state as we think it should be and compare it to the actual state from the store
+
+    -   ### This is Integration Testing
+        -   Because we are testing action creators and reducers together
+        -   Where to put the tests?
+            -   new file: src/integration.test.js
+            -   would separate into many test files for a larger app

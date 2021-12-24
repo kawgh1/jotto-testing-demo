@@ -332,7 +332,18 @@ Props used in Jotto App
             -   Inside our test, we'll make an object of the state as we think it should be and compare it to the actual state from the store
 
     -   ### This is Integration Testing
+
         -   Because we are testing action creators and reducers together
         -   Where to put the tests?
             -   new file: src/integration.test.js
             -   would separate into many test files for a larger app
+
+    -   ### Redux Thunk Testing Matrix
+        -   This matrix shows each of the code scenarios we want to test
+            -   incorrect guess with no guessed words
+            -   incorrect guess with some guessed words
+            -   correct guess with no guessed words
+            -   correct guess with some guessed words
+        -   We can use this matrix to help us set up our tests
+
+![redux-thunk-testing-matrix](https://raw.githubusercontent.com/kawgh1/jotto-testing-demo/redux-testing/redux-thunk-testing-matrix.png)

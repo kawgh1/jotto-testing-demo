@@ -288,6 +288,7 @@ Props used in Jotto App
             -   `state` => `state.success`
 
     -   #### Testing with `useSelector`
+
         -   Two choices for testing state accessed with `useSelector`:
             -   wrap component in `Provider` and use `mount`
                 -   `mount(<Provider> <Input /> </Provider>)`
@@ -297,3 +298,15 @@ Props used in Jotto App
             -   mock `useSelector`
                 -   **Pros**: isolated, faster if many children
                 -   **Cons**: farther from actual code, need to duplicate selector function, can be messy, confusing leading to testing errors
+
+    -   ### Redux Thunk
+        -   More flexibility for action creators
+        -   Return function instead of an action
+            -   Thunk = function that returns a function
+        -   Can dispatch multiple actions
+        -   Can access current state
+        -   Perfect for our `guessWord` action creator
+            -   It will always dispatch `GUESS_WORD` with every user guess
+            -   If guessed word is correct, it will also dispatch `CORRECT_GUESS`
+            -   Lets us access `success` piece of state
+            -   For determining whether or not to dispatch `CORRECT_GUESS`

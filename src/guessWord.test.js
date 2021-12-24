@@ -47,7 +47,7 @@ describe("no words guessed", () => {
     beforeEach(() => {
         wrapper = setup({
             secretWord: "party",
-            successState: false,
+            success: false,
             guessedWords: [],
         });
     });
@@ -63,7 +63,7 @@ describe("some words guessed", () => {
     beforeEach(() => {
         wrapper = setup({
             secretWord: "party",
-            successState: false,
+            success: false,
             guessedWords: [{ guessedWord: "agile", letterMatchCount: 1 }],
         });
     });
@@ -79,7 +79,7 @@ describe("secret word was guessed", () => {
     beforeEach(() => {
         wrapper = setup({
             secretWord: "party",
-            successState: false,
+            success: false,
             guessedWords: [{ guessedWord: "agile", letterMatchCount: 1 }],
         });
 

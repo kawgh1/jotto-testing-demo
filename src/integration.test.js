@@ -1,6 +1,6 @@
 // need to import the store for testing
 import { storeFactory } from "../test/testUtils";
-import { guessWordActionDispatcher } from "./actions";
+import { guessWord } from "./actions";
 
 describe("guessWord action dispatcher", () => {
     const secretWord = "party";
@@ -12,24 +12,24 @@ describe("guessWord action dispatcher", () => {
             store = storeFactory(initialState);
         });
         test("updates state correctly for unsuccessful guess", () => {
-            store.dispatch(guessWordActionDispatcher(unsuccessfulGuess));
+            store.dispatch(guessWord(unsuccessfulGuess));
             const newState = store.getState();
+
             const expectedState = {
                 ...initialState,
                 success: false,
                 guessedWords: [
                     {
-                        guessWord: unsuccessfulGuess,
+                        guessedWord: unsuccessfulGuess,
                         letterMatchCount: 3,
                     },
                 ],
             };
-
             expect(newState).toEqual(expectedState);
         });
 
         test("updates state correctly for successful guess", () => {
-            store.dispatch(guessWordActionDispatcher(secretWord));
+            store.dispatch(guessWord(secretWord));
             const newState = store.getState();
             const expectedState = {
                 secretWord,
@@ -53,7 +53,7 @@ describe("guessWord action dispatcher", () => {
             store = storeFactory(initialState);
         });
         test("updates state correctly for unsuccessful guess", () => {
-            store.dispatch(guessWordActionDispatcher(unsuccessfulGuess));
+            store.dispatch(guessWord(unsuccessfulGuess));
             const newState = store.getState();
             const expectedState = {
                 secretWord,
@@ -67,7 +67,7 @@ describe("guessWord action dispatcher", () => {
         });
 
         test("updates state correctly for successful guess", () => {
-            store.dispatch(guessWordActionDispatcher(secretWord));
+            store.dispatch(guessWord(secretWord));
             const newState = store.getState();
             const expectedState = {
                 secretWord,

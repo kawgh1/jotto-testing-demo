@@ -30,12 +30,12 @@ describe("if there are no words guessed", () => {
         wrapper = setup({ guessedWords: [] });
     });
     test("renders without error", () => {
-        // const wrapper = setup({ guessWords: [] });
+        // const wrapper = setup({ guessedWords: [] });
         const component = findByTestAttr(wrapper, "component-guessed-words");
         expect(component.length).toBe(1);
     });
     test("renders instructions to guess another word", () => {
-        // const wrapper = setup({ guessWords: [] });
+        // const wrapper = setup({ guessedWords: [] });
         const instructions = findByTestAttr(wrapper, "guess-instructions");
         expect(instructions.text().length).not.toBe(0);
     });

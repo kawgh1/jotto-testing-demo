@@ -2,10 +2,14 @@ import React from "react";
 // since this file is not a unit test, it is not isolated
 // we will be mounting the entire app in these tests
 import { mount } from "enzyme";
+import { Provider } from "react-redux";
 
 // import App to mount it
 import App from "./App";
-import { findByTestAttr } from "../test/testUtils";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
+
+// explicitly activate global mock to make sure getSecretWord doesnt make a network call
+jest.mock("./actions");
 
 // This file is testing the app as a whole and mocking the user guess a word action
 // notice we are mounting the app, not using shallow
@@ -18,9 +22,14 @@ import { findByTestAttr } from "../test/testUtils";
  * @param {object} state - Initial conditions.
  * @returns {Wrapper} - Enzyme wrapper of mounted App component
  */
-const setup = (state = {}) => {
+const setup = (initialState = {}) => {
+    const store = storeFactory(initialState);
     // mount, not shallow
-    const wrapper = mount(<App />);
+    const wrapper = mount(
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
 
     // add value to input box
     const inputBox = findByTestAttr(wrapper, "input-box");
@@ -33,7 +42,7 @@ const setup = (state = {}) => {
     return wrapper;
 };
 
-describe.skip("no words guessed", () => {
+describe("no words guessed", () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
@@ -49,7 +58,7 @@ describe.skip("no words guessed", () => {
     });
 });
 
-describe.skip("some words guessed", () => {
+describe("some words guessed", () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({
@@ -65,7 +74,7 @@ describe.skip("some words guessed", () => {
     });
 });
 
-describe.skip("secret word was guessed", () => {
+describe("secret word was guessed", () => {
     let wrapper;
     beforeEach(() => {
         wrapper = setup({

@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { guessWord } from "./actions";
 
 function Input({ secretWord }) {
     // not destructuring so that the mock functions work in testing, weird thing
     const [currentGuess, setCurrentGuess] = React.useState("");
     // redux
     const success = useSelector((state) => state.success);
+    const dispatch = useDispatch();
 
     if (success) {
         return <div data-test="component-input" />;
@@ -28,8 +30,9 @@ function Input({ secretWord }) {
                     className="btn btn-primary mb-2"
                     onClick={(event) => {
                         event.preventDefault();
-                        // TODO: update guessedWords
-                        // TODO: check against secretWord and update successState if needed
+                        // update guessedWords
+                        // check against secretWord and update successState if needed
+                        dispatch(guessWord(currentGuess));
                         setCurrentGuess("");
                     }}
                 >

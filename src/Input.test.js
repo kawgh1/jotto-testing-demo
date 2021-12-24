@@ -89,15 +89,24 @@ describe("state controlled input field", () => {
     //     React.useSate = originalUseState
     // })
 
+    let mockSetCurrentGuess = jest.fn();
+    let wrapper;
+
+    beforeEach(() => {
+        mockSetCurrentGuess.mockClear();
+        React.useState = () => ["", mockSetCurrentGuess];
+        wrapper = setup({ success: false });
+    });
+
     test("state updates with value of input box on change", () => {
         // here we are making a "mock useState" function to run our test,
         // the actual useState() function from React is not being called
         // we tell it what it takes ("") and what it returns (mockSetCurrentGuess)
-        const mockSetCurrentGuess = jest.fn();
+        // const mockSetCurrentGuess = jest.fn();
         // override useState method
-        React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+        // React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
 
-        const wrapper = setup({ success: false });
+        // const wrapper = setup({ success: false });
         const inputBox = findByTestAttr(wrapper, "input-box");
 
         // mock event
@@ -108,10 +117,10 @@ describe("state controlled input field", () => {
     });
 
     test("field is cleared on submit button click", () => {
-        const mockSetCurrentGuess = jest.fn();
-        React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
+        // const mockSetCurrentGuess = jest.fn();
+        // React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
 
-        const wrapper = setup();
+        // const wrapper = setup();
         const submitButton = findByTestAttr(wrapper, "submit-button");
 
         submitButton.simulate("click", { preventDefault() {} });

@@ -346,4 +346,14 @@ Props used in Jotto App
             -   correct guess with some guessed words
         -   We can use this matrix to help us set up our tests
 
-![redux-thunk-testing-matrix](https://raw.githubusercontent.com/kawgh1/jotto-testing-demo/redux-testing/redux-thunk-testing-matrix.png)
+-   ![redux-thunk-testing-matrix](https://raw.githubusercontent.com/kawgh1/jotto-testing-demo/redux-testing/redux-thunk-testing-matrix.png)
+
+    -   ### Revisiting Functional Tests
+        -   Functional "guess word" tests
+        -   We need to:
+            -   adapt `setup` function
+                -   use `storeFactory` to create store from initial state
+                -   Wrap App in Provider with store as a prop
+            -   Add `guessWord` action dispatcher to Input component
+                -   use Redux `useDispatch()` hook
+            -   Update `App` component to get `guessedWords` from state

@@ -9,6 +9,8 @@ import { getSecretWord, correctGuess, actionTypes } from "./";
 //     });
 // });
 
+import { storeFactory } from "../../test/testUtils";
+
 describe("getSecretWord", () => {
     beforeEach(() => {
         moxios.install();
@@ -17,6 +19,7 @@ describe("getSecretWord", () => {
         moxios.uninstall();
     });
     test("secretWord is returned", () => {
+        const store = storeFactory();
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
@@ -29,7 +32,8 @@ describe("getSecretWord", () => {
 
         // by using 'return' and calling our tested function
         // we know that the axios/moxios call will resolve before the test completes
-        return getSecretWord().then((secretWord) => {
+        return store.dispatch(getSecretWord()).then(() => {
+            const secretWord = store.getState().secretWord;
             expect(secretWord).toBe("party");
         });
     });

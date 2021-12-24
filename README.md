@@ -300,6 +300,7 @@ Props used in Jotto App
                 -   **Cons**: farther from actual code, need to duplicate selector function, can be messy, confusing leading to testing errors
 
     -   ### Redux Thunk
+        -   **npm install redux-thunk**
         -   More flexibility for action creators
         -   Return function instead of an action
             -   Thunk = function that returns a function

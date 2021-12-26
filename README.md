@@ -13,6 +13,7 @@
     -   `context-testing` - has code for React Context testing
 
 -   based on React Testing course by Bonnie Schulkin
+-   https://www.udemy.com/course/react-testing-with-jest-and-enzyme/
 
 ![jotto-mock-wireframe](https://raw.githubusercontent.com/kawgh1/jotto-testing-demo/7a7c412269cbb20437ea41e5f594f0c3b46d5614/jotto-app-wireframe-mock.png)
 
